@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
     "rxjs": "~7.4.0",
+    "survey-angular": "^1.9.28",
+    "survey-creator-knockout": "^1.9.35",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

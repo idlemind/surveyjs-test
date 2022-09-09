@@ -4,21 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SurveyLibraryComponent } from './survey-library/survey-library.component';
-import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SurveyAngularModule } from "survey-angular-ui";
+import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyLibraryComponent,
-    SurveyCreatorComponent,
-    HomeComponent
+    HomeComponent,
+    SurveyCreatorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SurveyAngularModule
   ],
   providers: [],
   bootstrap: [AppComponent]

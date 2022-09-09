@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ICreatorOptions } from 'survey-creator-core';
-import { SurveyCreator } from 'survey-creator-knockout';
-import { FunctionFactory } from 'survey-core';
+import { SurveyCreator } from "survey-creator-knockout";
+import { FunctionFactory } from "survey-core";
 
 // Import survey definition
 declare var require: any;
@@ -22,28 +21,21 @@ export class SurveyCreatorComponent implements OnInit {
 
   // The list of listeners
   isReadyCallbackList: any = [];
-
-  constructor(private http: HttpClient ) {
+  
+  constructor(private http: HttpClient) {
     instance = this;
   }
 
   ngOnInit(): void {
-    const creatorOptions: ICreatorOptions = {
-      //showLogicTab: true,
-      isAutoSave: false
-    };
-
-    // Register the functions
     FunctionFactory.Instance.register("getCountryOfficialName", this.getCountryOfficialName, true);
     FunctionFactory.Instance.register("getCountryRegion", this.getCountryRegion, true);
     FunctionFactory.Instance.register("isCountryExist", this.isCountryExist, true);
 
+    const creatorOptions = { showLogicTab: true };
     const creator = new SurveyCreator(creatorOptions);
-    creator.text= JSON.parse(surveyJSON);
-    creator.survey.showProgressBar = "on";
-    creator.survey.progressBarType = "buttons";
+    creator.JSON = surveyJSON;
 
-    creator.render("surveyCreator");
+    creator.render("creatorElement");
   }
 
   // All functions from https://surveyjs.io/form-library/examples/questiontype-expression-async/angular#content-js

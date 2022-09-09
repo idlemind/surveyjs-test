@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { StylesManager, Model, SurveyNG, FunctionFactory } from 'survey-angular';
+import { Model, StylesManager, FunctionFactory } from "survey-core";
 
 
 // Import survey definition
@@ -9,7 +9,8 @@ var surveyJSON: any = require('../../assets/surveyJSON.json');
 
 var instance: any = {};
 
-StylesManager.applyTheme("modern");
+import "survey-core/defaultV2.css";
+StylesManager.applyTheme("defaultV2");
 
 
 @Component({
@@ -18,6 +19,7 @@ StylesManager.applyTheme("modern");
   styleUrls: ['./survey-library.component.scss']
 })
 export class SurveyLibraryComponent implements OnInit {
+  @Input() model!: Model;
 
   // Hashtable for countries information
   countriesInformation: any = {};
@@ -30,14 +32,11 @@ export class SurveyLibraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const survey = new Model(surveyJSON);
-
-    // Register the functions
     FunctionFactory.Instance.register("getCountryOfficialName", this.getCountryOfficialName, true);
     FunctionFactory.Instance.register("getCountryRegion", this.getCountryRegion, true);
     FunctionFactory.Instance.register("isCountryExist", this.isCountryExist, true);
 
-    SurveyNG.render("surveyContainer", { model: survey });
+    this.model = new Model(surveyJSON);
   }
 
   // All functions from https://surveyjs.io/form-library/examples/questiontype-expression-async/angular#content-js
